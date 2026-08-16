@@ -84,12 +84,37 @@ export class RfsDcTracker extends HandlebarsApplicationMixin(ApplicationV2) {
     return this.position;
   }
 
+  /**
+   * Resolve Foundry's scene navigation across core versions.
+   * v14 uses `#navigation`; v13 uses `#scene-navigation`. Checked in that
+   * order rather than as one comma selector, since `querySelector` returns the
+   * first match in document order, not in selector order.
+   */
+  static _getSceneNav() {
+    return document.querySelector("#navigation") ?? document.querySelector("#scene-navigation");
+  }
+
+  /**
+   * Vertical offset needed to clear the scene navigation.
+   *
+   * v14 draws the nav as a horizontal bar across the top, so we hang below its
+   * bottom edge. v13 draws it as a vertical column down the left side, where
+   * the bottom edge is nearly the full viewport height — hanging off that puts
+   * the widget off-screen, so we align to its top edge instead.
+   *
+   * Decided by measuring the element rather than sniffing the core version,
+   * so it keeps working if the layout changes again.
+   */
+  static _navClearance(nav) {
+    if (!nav) return 0;
+    const r = nav.getBoundingClientRect();
+    return r.height > r.width ? r.top : r.bottom;
+  }
+
   /** @override */
   _onRender(context, options) {
-    // Hang from the bottom edge of Foundry's navigation bar so the widget
-    // sits flush at the top of the canvas area rather than behind the nav.
-    const nav = document.querySelector("#navigation");
-    this.element.style.top = nav ? `${nav.getBoundingClientRect().bottom}px` : "0px";
+    // Sit flush at the top of the canvas area rather than behind the nav.
+    this.element.style.top = `${RfsDcTracker._navClearance(RfsDcTracker._getSceneNav())}px`;
 
     // Close the popover when the pointer leaves the target widget
     const widget = this.element.querySelector(".rfs-target-display");

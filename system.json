@@ -5,7 +5,7 @@
   "background": "systems/roll-for-shoes/assets/ui/rfs-system-logo.webp",
   "version": "0.1.0",
   "compatibility": {
-    "minimum": "14",
+    "minimum": "13",
     "verified": "14.359"
   },
   "authors": [
