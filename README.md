@@ -1,6 +1,8 @@
 # Roll for Shoes — Foundry VTT System
 
-A Foundry VTT v14 game system implementation of [Roll for Shoes](https://rollforshoes.com/) by Ben Wray.
+A Foundry VTT game system implementation of [Roll for Shoes](https://rollforshoes.com/) by Ben Wray.
+
+Supports Foundry VTT **v13 and v14** (verified against 13.351 and 14.359).
 
 Written by Claude.ai
 Designed by heysparky (Karen McMullan)
@@ -25,7 +27,7 @@ Assets
 
 **Manual install** — paste this URL into Foundry's system browser:
 ```
-https://raw.githubusercontent.com/YOUR_USERNAME/roll-for-shoes/main/system.json
+https://raw.githubusercontent.com/sazap10/roll-for-shoes/main/system.json
 ```
 
 ## Development
@@ -35,14 +37,14 @@ Clone directly into that directory for live-reload development.
 
 ```bash
 cd path/to/foundry/userData/Data/systems
-git clone https://github.com/YOUR_USERNAME/roll-for-shoes.git
+git clone https://github.com/sazap10/roll-for-shoes.git
 ```
 
 ### Architecture
 
 ```
 roll-for-shoes/
-├── system.json              Foundry v14 manifest
+├── system.json              Foundry manifest (v13+)
 ├── template.json            Type names only (schema is in JS)
 ├── roll-for-shoes.mjs       Entry point — init hook
 ├── src/

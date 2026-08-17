@@ -12,6 +12,8 @@
  * Double click (owner / GM): open the character sheet.
  */
 
+import { RfsDcTracker } from "./dc-tracker.mjs";
+
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 export class RfsPcDisplay extends HandlebarsApplicationMixin(ApplicationV2) {
@@ -68,11 +70,13 @@ export class RfsPcDisplay extends HandlebarsApplicationMixin(ApplicationV2) {
 
   /** @override */
   _onRender(context, options) {
-    // Position flush at nav bottom, immediately right of the DC tracker card
-    const nav       = document.querySelector("#navigation");
+    // Clear Foundry's scene navigation, immediately right of the DC tracker
+    // card. The clearance is the nav's bottom edge when it is a horizontal bar
+    // (v14) and its top edge when it is a vertical column (v13) — see
+    // RfsDcTracker._navClearance. Shared with the tracker so both stay aligned.
     const trackerEl = document.getElementById("rfs-dc-tracker");
-    const navBottom = nav ? nav.getBoundingClientRect().bottom : 0;
-    this.element.style.top = `${navBottom}px`;
+    const navOffset = RfsDcTracker._navClearance(RfsDcTracker._getSceneNav());
+    this.element.style.top = `${navOffset}px`;
     if (trackerEl) {
       this.element.style.left = `${trackerEl.getBoundingClientRect().right + 16}px`;
     }

@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Roll for Shoes is a **Foundry VTT v14 game system** — a pure JavaScript/Handlebars/CSS project with no build step, no package.json, and no external dependencies. Files are loaded directly by Foundry. There are no compile, test, or lint commands.
+Roll for Shoes is a **Foundry VTT game system supporting v13 and v14** — a pure JavaScript/Handlebars/CSS project with no build step, no package.json, and no external dependencies. Files are loaded directly by Foundry. There are no compile, test, or lint commands.
 
 To develop, copy/symlink the repo into your Foundry `Data/systems/roll-for-shoes/` folder and reload Foundry in the browser.
 
